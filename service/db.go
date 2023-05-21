@@ -33,8 +33,8 @@ const (
 	host        = "localhost"
 	port        = "5432"
 	dbName      = "labora_proyect_3"
-	rolName     = "postgres"
-	rolPassword = "2015"
+	rolName     = "tita"
+	rolPassword = "123"
 )
 
 var dbConn *sql.DB

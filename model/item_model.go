@@ -6,7 +6,7 @@ type Item struct {
 	OrderDate string `json:"orderDate"`
 	Product string `json:"product"`
 	Quantity int `json:"quantity"`
-	Price int `json:"price"`
+	Price float64 `json:"price"`
 }
 
 var Items = []Item{
