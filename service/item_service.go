@@ -15,7 +15,7 @@ func GetItems() ([]model.Item, error) {
 		fmt.Println(err)
 		return nil, err
 	}
-	fmt.Println("HOLAAAAAAAA")
+	
 	defer rows.Close()
 
 	// Itera sobre cada fila en 'rows' y crea una instancia de 'models.Item' con los valores de cada columna.
