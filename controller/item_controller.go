@@ -86,6 +86,9 @@ func CreateNewItem(w http.ResponseWriter, r *http.Request) {
 		return
 	}
 
+	//CrearID PENDIENTE VERIFICAR !!!!!!!!!!!!!!!
+
+
 	// Si la creación es exitosa, puedes enviar una respuesta al cliente
 	w.WriteHeader(http.StatusCreated)
 	fmt.Fprintf(w, "Item created successfully")

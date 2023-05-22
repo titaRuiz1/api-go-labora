@@ -46,8 +46,7 @@ func CreateItem(item model.Item) error {
 	}
 
 	// Ejecutamos la consulta SQL para insertar un nuevo registro en la tabla 'items' dentro de la transacción.
-	_, err = tx.Exec("INSERT INTO items (customer_name, order_date, product, quantity, price) VALUES ($1, $2, $3, $4, $5)",
-		item.CustomerName, item.OrderDate, item.Product, item.Quantity, item.Price)
+	_, err = tx.Exec(SQLInsertNewItem,item.CustomerName, item.OrderDate, item.Product, item.Quantity, item.Price)
 	if err != nil {
 		// Si algo salió mal, hacemos un rollback de la transacción
 		tx.Rollback()
@@ -63,3 +62,11 @@ func CreateItem(item model.Item) error {
 	return nil
 }
 
+
+const SQLInsertNewItem =`INSERT INTO items
+												(customer_name,
+													order_date,
+												 	product,
+													quantity, 
+													price) 
+												 	VALUES (?, ?, ?, ?, ?)`
