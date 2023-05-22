@@ -3,6 +3,7 @@ package service
 import (
 	"fmt"
 	"labora-api/model"
+	"log"
 )
 
 // GetItems obtiene todos los items de la tabla 'items' de la base de datos.
@@ -35,3 +36,30 @@ func GetItems() ([]model.Item, error) {
 	}
 	return items, nil
 }
+
+
+func CreateItem(item model.Item) error {
+	// Iniciamos una transacción
+	tx, err := Db.Begin()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	// Ejecutamos la consulta SQL para insertar un nuevo registro en la tabla 'items' dentro de la transacción.
+	_, err = tx.Exec("INSERT INTO items (customer_name, order_date, product, quantity, price) VALUES ($1, $2, $3, $4, $5)",
+		item.CustomerName, item.OrderDate, item.Product, item.Quantity, item.Price)
+	if err != nil {
+		// Si algo salió mal, hacemos un rollback de la transacción
+		tx.Rollback()
+		log.Fatal(err)
+	}
+
+	// Si todo salió bien, hacemos commit de la transacción
+	err = tx.Commit()
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return nil
+}
+
